@@ -79,12 +79,13 @@ class Game:
                 self.update()
                 time.sleep(self.speed/4)
             self.state = "Play"
+            start = time.time()
             self.index = 0
             while self.state == "Play":
                 for event in pg.event.get():
                     if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                         pg.quit()
-                    elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+                    elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and time.time() - start > 0.05:
                         if self.mousepostobox(pg.mouse.get_pos()) != None:
                             self.clickedbox = self.mousepostobox(pg.mouse.get_pos())
                             self.update()
